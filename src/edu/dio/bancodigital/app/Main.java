@@ -1,4 +1,4 @@
-package edu.dio.bancodigital;
+package edu.dio.bancodigital.app;
 
 import java.util.Scanner;
 

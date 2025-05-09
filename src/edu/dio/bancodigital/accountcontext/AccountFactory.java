@@ -1,6 +1,7 @@
-package edu.dio.bancodigital.usercontext;
+package edu.dio.bancodigital.accountcontext;
 
 import edu.dio.bancodigital.exceptions.MinorAccountRestrictionException;
+import edu.dio.bancodigital.usercontext.User;
 
 public abstract class AccountFactory {
     public abstract Account createAccount(User holder);

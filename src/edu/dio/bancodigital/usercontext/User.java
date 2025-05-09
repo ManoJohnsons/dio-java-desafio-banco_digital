@@ -3,6 +3,8 @@ package edu.dio.bancodigital.usercontext;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.dio.bancodigital.accountcontext.Account;
+
 public class User {
     private String name;
     private int age;

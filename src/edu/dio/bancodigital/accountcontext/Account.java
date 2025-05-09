@@ -1,4 +1,6 @@
-package edu.dio.bancodigital.usercontext;
+package edu.dio.bancodigital.accountcontext;
+
+import edu.dio.bancodigital.usercontext.User;
 
 public abstract class Account {
     private static final String AGENCY = "0001";

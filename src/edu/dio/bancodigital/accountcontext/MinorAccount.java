@@ -1,6 +1,7 @@
-package edu.dio.bancodigital.usercontext;
+package edu.dio.bancodigital.accountcontext;
 
 import edu.dio.bancodigital.exceptions.DailyLimitExceededException;
+import edu.dio.bancodigital.usercontext.User;
 
 public class MinorAccount extends Account {
     private int dailyWithdrawLimitValue;

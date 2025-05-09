@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import edu.dio.bancodigital.usercontext.Account;
-import edu.dio.bancodigital.usercontext.AccountFactory;
-import edu.dio.bancodigital.usercontext.CheckingAccountFactory;
-import edu.dio.bancodigital.usercontext.MinorAccountFactory;
-import edu.dio.bancodigital.usercontext.SavingAccountFactory;
+import edu.dio.bancodigital.accountcontext.Account;
+import edu.dio.bancodigital.accountcontext.AccountFactory;
+import edu.dio.bancodigital.accountcontext.CheckingAccountFactory;
+import edu.dio.bancodigital.accountcontext.MinorAccountFactory;
+import edu.dio.bancodigital.accountcontext.SavingAccountFactory;
 import edu.dio.bancodigital.usercontext.User;
 
 public class Bank {
