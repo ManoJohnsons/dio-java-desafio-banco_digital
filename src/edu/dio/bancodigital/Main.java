@@ -1,19 +1,16 @@
 package edu.dio.bancodigital;
 
 import edu.dio.bancodigital.bankcontext.Bank;
-import edu.dio.bancodigital.usercontext.Account;
-import edu.dio.bancodigital.usercontext.CheckingAccount;
-import edu.dio.bancodigital.usercontext.SavingsAccount;
 import edu.dio.bancodigital.usercontext.User;
 
 public class Main {
     public static void main(String[] args) {
-        User user_1 = new User("John", 22);
-        Account user_1_ca = new CheckingAccount(user_1);
-        Account user_1_sa = new SavingsAccount(user_1);
+        User user_1 = new User("John", 15);
+        User user_2 = new User("Karine", 22);
         Bank bank = new Bank();
-        bank.addAccount(user_1_ca);
-        bank.addAccount(user_1_sa);
+        bank.createAccount(user_1);
+        bank.createAccount(user_2);
+        bank.manageAccount(user_1, "0001", "1");
         bank.showInfoAccounts();
     }
 }

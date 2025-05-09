@@ -1,14 +1,17 @@
 package edu.dio.bancodigital.usercontext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     private String name;
     private int age;
-    private boolean isMinor;
+    private List<Account> accounts;
 
     public User(String name, int age) {
         this.name = name;
         this.age = age;
-        this.isMinor = this.age < 18 ? true : false;
+        this.accounts = new ArrayList<>();
     }
 
     public String getName() {
@@ -16,6 +19,22 @@ public class User {
     }
 
     public boolean isMinor() {
-        return isMinor;
+        return age < 18;
+    }
+
+    public void linkAccount(Account account) {
+        accounts.add(account);
+    }
+
+    public boolean hasAccount() {
+        return !accounts.isEmpty();
+    }
+
+    public boolean hasAccountOfType(Class<? extends Account> accountType) {
+        return accounts.stream().anyMatch(account -> account.getClass().equals(accountType));
+    }
+
+    public Account chooseAccount(String agencyNumber, String accountNumber) {
+        return accounts.stream().filter(account -> account.getAgencyAccount().equals(agencyNumber) && account.getNumberAccount().equals(accountNumber)).findFirst().orElseThrow(() -> new IllegalArgumentException("Conta de destino não encontrada."));
     }
 }

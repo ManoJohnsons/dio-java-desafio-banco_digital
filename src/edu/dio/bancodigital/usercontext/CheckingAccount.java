@@ -8,16 +8,20 @@ public class CheckingAccount extends Account {
 
     @Override
     public void deposit(int value) {
+        super.checkDeposit(value);
         super.balance += value;
     }
 
     @Override
     public void withdraw(int value) {
+        super.checkWithdraw(value);
         super.balance -= value;
     }
 
     @Override
-    public void transfer(int value, Account destinationAccount) {
+    public void transfer(int value, String agencyAccountDestination, String numberAccountDestination) {
+        super.checkTransfer(agencyAccountDestination, numberAccountDestination);
+        Account destinationAccount = super.holder.chooseAccount(agencyAccountDestination, numberAccountDestination);
         this.withdraw(value);
         destinationAccount.deposit(value);
     }
@@ -28,5 +32,5 @@ public class CheckingAccount extends Account {
         super.showInfo();
         System.out.println("======================");
     }
-    
+
 }

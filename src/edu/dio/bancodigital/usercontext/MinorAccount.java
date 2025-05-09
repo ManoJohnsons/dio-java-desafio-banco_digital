@@ -2,14 +2,14 @@ package edu.dio.bancodigital.usercontext;
 
 import edu.dio.bancodigital.exceptions.DailyLimitExceededException;
 
-public class SavingsAccount extends Account {
-    private int dailyWithdrawLimit;
+public class MinorAccount extends Account {
+    private int dailyWithdrawLimitValue;
     private int dailyTransferLimit;
 
-    public SavingsAccount(User holder) {
+    public MinorAccount(User holder) {
         super(holder);
-        this.dailyWithdrawLimit = 5;
-        this.dailyTransferLimit = 3;
+        dailyWithdrawLimitValue = 25000;
+        dailyTransferLimit = 3;
     }
 
     @Override
@@ -22,11 +22,11 @@ public class SavingsAccount extends Account {
     public void withdraw(int value) {
         super.checkDeposit(value);
 
-        if (dailyWithdrawLimit <= 0)
-            throw new DailyLimitExceededException("O limite diário de saques foi excedido.");
+        if (dailyWithdrawLimitValue <= 0)
+            throw new DailyLimitExceededException("O valor diário de saques foi excedido.");
 
         super.balance -= value;
-        dailyWithdrawLimit--;
+        dailyWithdrawLimitValue -= value;
     }
 
     @Override
@@ -40,15 +40,16 @@ public class SavingsAccount extends Account {
 
         this.withdraw(value);
         destinationAccount.deposit(value);
+        dailyTransferLimit--;
     }
 
     @Override
     public void showExtract() {
-        System.out.println("=== Conta Poupança ===");
+        System.out.println("=== Conta para menores ===");
         super.showInfo();
-        System.out.println(String.format("Limite diário de saque atual: %d", dailyWithdrawLimit));
+        System.out
+                .println(String.format("Valor diário de saque atual: R$%.2f", (double) dailyWithdrawLimitValue / 100));
         System.out.println(String.format("Limite diário de tranferências atual: %d", dailyTransferLimit));
-        System.out.println("======================");
+        System.out.println("==========================");
     }
-
 }
