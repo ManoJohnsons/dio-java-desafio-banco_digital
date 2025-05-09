@@ -13,10 +13,11 @@ import edu.dio.bancodigital.usercontext.User;
 
 public class Bank {
     private List<Account> accountsList;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
-    public Bank() {
+    public Bank(Scanner sc) {
         this.accountsList = new ArrayList<>();
+        this.sc = sc;
     }
 
     public void createAccount(User user) {
@@ -82,7 +83,8 @@ public class Bank {
                     String numberAccountDestination = sc.nextLine();
                     System.out.println("Digite o valor a ser transferido: ");
                     int transferValue = sc.nextInt();
-                    account.transfer(transferValue, agencyAccountDestination, numberAccountDestination);
+                    Account destinationAccount = findAccout(agencyAccountDestination, numberAccountDestination);
+                    account.transfer(transferValue, destinationAccount);
                     break;
                 case 4:
                     account.showExtract();
@@ -94,5 +96,42 @@ public class Bank {
                     throw new IllegalArgumentException("Opção inválida");
             }
         }
+    }
+
+    public List<User> getUsers() {
+        List<User> usersList = new ArrayList<>();
+        if (!accountsList.isEmpty()) {
+            for (Account a : accountsList) {
+                usersList.add(a.getHolder());
+            }
+        }
+        return usersList;
+    }
+
+    public User getUserByName(String name) {
+        User user = null;
+        if (!getUsers().isEmpty()) {
+            for (User u : getUsers()) {
+                if (u.getName().equalsIgnoreCase(name)) {
+                    user = u;
+                }
+            }
+        }
+
+        if (user == null)
+            throw new NullPointerException("Usuário não encontrado.");
+        return user;
+    }
+
+    private Account findAccout(String agencyAccount, String numberAccount) {
+        Account account = null;
+        if (!accountsList.isEmpty()) {
+            for (Account a : accountsList) {
+                if (a.getAgencyAccount().equals(agencyAccount) && a.getNumberAccount().equals(numberAccount)) {
+                    account = a;
+                }
+            }
+        }
+        return account;
     }
 }

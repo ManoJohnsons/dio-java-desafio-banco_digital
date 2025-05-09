@@ -19,9 +19,8 @@ public class CheckingAccount extends Account {
     }
 
     @Override
-    public void transfer(int value, String agencyAccountDestination, String numberAccountDestination) {
-        super.checkTransfer(agencyAccountDestination, numberAccountDestination);
-        Account destinationAccount = super.holder.chooseAccount(agencyAccountDestination, numberAccountDestination);
+    public void transfer(int value, Account destinationAccount) {
+        super.checkTransfer(destinationAccount);
         this.withdraw(value);
         destinationAccount.deposit(value);
     }

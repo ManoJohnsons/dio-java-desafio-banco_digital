@@ -35,6 +35,31 @@ public class User {
     }
 
     public Account chooseAccount(String agencyNumber, String accountNumber) {
-        return accounts.stream().filter(account -> account.getAgencyAccount().equals(agencyNumber) && account.getNumberAccount().equals(accountNumber)).findFirst().orElseThrow(() -> new IllegalArgumentException("Conta de destino não encontrada."));
+        return accounts.stream()
+                .filter(account -> account.getAgencyAccount().equals(agencyNumber)
+                        && account.getNumberAccount().equals(accountNumber))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException("Conta de destino não encontrada."));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== Informações do Usuário ===\n");
+        sb.append("Nome: ").append(name).append("\n");
+        sb.append("Idade: ").append(age).append(" anos\n");
+        sb.append("Contas:\n");
+
+        if (accounts.isEmpty()) {
+            sb.append("  Nenhuma conta vinculada.\n");
+        } else {
+            accounts.forEach(account -> {
+                sb.append("  - Agência: ").append(account.getAgencyAccount())
+                        .append(", Conta: ").append(account.getNumberAccount())
+                        .append("\n");
+            });
+        }
+
+        sb.append("=============================\n");
+        return sb.toString();
     }
 }

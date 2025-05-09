@@ -20,7 +20,7 @@ public abstract class Account {
 
     public abstract void withdraw(int value);
 
-    public abstract void transfer(int value, String agencyAccountDestination, String numberAccountDestination);
+    public abstract void transfer(int value, Account destinationAccount);
 
     public abstract void showExtract();
 
@@ -47,12 +47,12 @@ public abstract class Account {
             throw new IllegalArgumentException("O valor do saque não pode ser negativo.");
     }
 
-    protected void checkTransfer(String agencyAccountDestination, String numberAccountDestination) {
-        if ((agencyAccountDestination.equals(null)) && (numberAccountDestination.equals(null))) {
+    protected void checkTransfer(Account destinationAccount) {
+        if (destinationAccount == null) {
             throw new NullPointerException("A conta especificada não existe.");
         }
 
-        if ((agencyAccountDestination.equals(this.agencyAccount)) && (numberAccountDestination.equals(this.numberAccount))) {
+        if (destinationAccount.equals(this)) {
             throw new IllegalArgumentException("A conta especifica não pode ser a mesma a transferir.");
         }
     }
@@ -63,5 +63,9 @@ public abstract class Account {
 
     public String getNumberAccount() {
         return numberAccount;
+    }
+
+    public User getHolder() {
+        return holder;
     }
 }

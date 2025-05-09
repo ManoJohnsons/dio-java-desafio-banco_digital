@@ -8,5 +8,4 @@ public class MinorAccountFactory extends AccountFactory {
         return new MinorAccount(holder);
     }
 
-    
 }

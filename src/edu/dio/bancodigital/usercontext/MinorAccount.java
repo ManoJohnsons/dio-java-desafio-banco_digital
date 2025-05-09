@@ -20,7 +20,7 @@ public class MinorAccount extends Account {
 
     @Override
     public void withdraw(int value) {
-        super.checkDeposit(value);
+        super.checkWithdraw(value);
 
         if (dailyWithdrawLimitValue <= 0)
             throw new DailyLimitExceededException("O valor diário de saques foi excedido.");
@@ -30,9 +30,8 @@ public class MinorAccount extends Account {
     }
 
     @Override
-    public void transfer(int value, String agencyAccountDestination, String numberAccountDestination) {
-        super.checkTransfer(agencyAccountDestination, numberAccountDestination);
-        Account destinationAccount = super.holder.chooseAccount(agencyAccountDestination, numberAccountDestination);
+    public void transfer(int value, Account destinationAccount) {
+        super.checkTransfer(destinationAccount);
 
         if (dailyTransferLimit <= 0) {
             throw new DailyLimitExceededException("O limite diário de transferências foi excedido.");
